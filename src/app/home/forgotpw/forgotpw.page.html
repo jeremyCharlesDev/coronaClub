@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center ion-padding-top">Modifier le mot de passe</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form #resetpwdForm="ngForm" >
+    <ion-grid>
+      <ion-row>
+        <ion-col size-lg="6" size-md="6" size-sm="6" size="12">
+          <ion-item>
+            <ion-label for="email" color="primary">Email :</ion-label>
+            <ion-input type="email" id="email" name="email" [(ngModel)]="email" required>
+            </ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-button [disabled]="!resetpwdForm.valid" class="waves-effect purple darken-4 btn" slot="center" expand="block" 
+    (click)="resetPwd(resetpwdForm.value)"
+      >Modifier le mot de passe</ion-button>
+      <ion-row class="forgotPw">
+        <ion-col size-lg="6" size-md="6" size-sm="6" size="12">
+          <small>
+            Veuillez indiquer l'adresse électronique que vous avez utilisée lors de l'inscription.
+          </small>
+        </ion-col>
+      </ion-row>
+  </form>
+</ion-content>

@@ -23,4 +23,8 @@ export class AuthenticateService {
   createNewUser(email: string, pass: string): Promise<any> {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, pass);
   }
+
+  resetPassword(email: string): Promise<void> {
+    return this.afAuth.auth.sendPasswordResetEmail(email);
+  }
 }

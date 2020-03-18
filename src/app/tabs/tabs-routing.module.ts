@@ -15,11 +15,11 @@ const routes: Routes = [
             loadChildren: () =>
               import('../home/home.module').then(m => m.HomePageModule)
           },
-          // {
-          //   path: 'ajout-match',
-          //   loadChildren: () =>
-          //     import('../home/ajout-match/ajout-match.module').then(m => m.AjoutMatchPageModule)
-          // }
+          {
+            path: 'login',
+            loadChildren: () =>
+              import('../home/login/login.module').then(m => m.LoginPageModule)
+          }
         ]
       },
       {

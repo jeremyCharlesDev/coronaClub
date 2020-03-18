@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Ajouter un match</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container-match">
+    <form #addForm="ngForm" (ngSubmit)="addMatch(addForm.value)">
+      <ion-item>
+        <ion-input type="text" name="nom" ngModel required placeholder="Nom du match"> </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="text" name="date" ngModel placeholder="Date"> </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="text" name="ville" ngModel placeholder="Lieu"> </ion-input>
+      </ion-item>
+      <ion-button type="submit" expand="block" [disabled]="!addForm.valid">Valider</ion-button>
+    </form>
+  </div>
+</ion-content>

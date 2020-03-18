@@ -15,11 +15,16 @@ const routes: Routes = [
             loadChildren: () =>
               import('../home/home.module').then(m => m.HomePageModule)
           },
-          // {
-          //   path: 'ajout-match',
-          //   loadChildren: () =>
-          //     import('../home/ajout-match/ajout-match.module').then(m => m.AjoutMatchPageModule)
-          // }
+          {
+            path: 'ajout-match',
+            loadChildren: () =>
+              import('../match/ajout-match/ajout-match.module').then(m => m.AjoutMatchPageModule)
+          },
+          {
+            path: 'gestion-match',
+            loadChildren: () =>
+              import('../match/gestion-match/gestion-match.module').then(m => m.GestionMatchPageModule)
+          }
         ]
       },
       {

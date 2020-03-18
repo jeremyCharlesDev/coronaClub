@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="removeMatch()">
+        <ion-icon size="large" name="trash"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{ matchModif.nom }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container-match">
+    <form #editForm="ngForm" (ngSubmit)="editMatch(editForm.value)">
+      <ion-item>
+        <ion-input type="text" name="nom" [(ngModel)]="matchModif.nom" required placeholder="Nom du match"> </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="text" name="date" [(ngModel)]="matchModif.date" placeholder="Date"> </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="text" name="ville" [(ngModel)]="matchModif.ville" placeholder="Lieu"> </ion-input>
+      </ion-item>
+      <ion-button type="submit" expand="block" [disabled]="!editForm.valid">Valider</ion-button>
+    </form>
+  </div>
+</ion-content>

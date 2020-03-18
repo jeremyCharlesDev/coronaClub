@@ -5,7 +5,15 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+  },  {
+    path: 'ajout-match',
+    loadChildren: () => import('./match/ajout-match/ajout-match.module').then( m => m.AjoutMatchPageModule)
   },
+  {
+    path: 'gestion-match',
+    loadChildren: () => import('./match/gestion-match/gestion-match.module').then( m => m.GestionMatchPageModule)
+  },
+
 ];
 @NgModule({
   imports: [

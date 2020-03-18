@@ -20,6 +20,7 @@
     required
     placeholder="Nom du joueur"
     >
+    <br>
     <input
     type="text"
     id="newJoueur"
@@ -29,6 +30,7 @@
     required
     placeholder="Email du joueur"
     >
+    <br>
     <input
     type="text"
     id="newJoueur"
@@ -38,6 +40,7 @@
     required
     placeholder="Téléphone du joueur"
     >
+    <br>
     <input
     type="text"
     id="newJoueur"
@@ -47,6 +50,7 @@
     required
     placeholder="Prénom du joueur"
     >
+    <br>
     <input
     type="text"
     id="newJoueur"
@@ -56,18 +60,8 @@
     required
     placeholder="Poste du joueur"
     >
-    <input
-    type="file"
-    id="newJoueur"
-    name="photo"
-    #photo="ngModel"
-    [(ngModel)]="newJoueur.photo"
-    required
-    placeholder="Photo du joueur"
-    >
-
   </ion-card-content>
 </ion-card>
-<ion-button expand="full" (click)="addJoueur(nom.value, email.value, tel.value, prenom.value, poste.value, photo.value)" >Valider</ion-button>
+<ion-button expand="full" (click)="addJoueur(nom.value, email.value, tel.value, prenom.value, poste.value)" >Valider</ion-button>
 </form>
 </ion-content>

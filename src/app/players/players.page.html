@@ -1,17 +1,20 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Players
-    </ion-title>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title class="ion-text-start">Gestion des Joueurs</ion-title>
+    <ion-button slot="end" size="large" [routerLink]="['/tabs/players/add-players']"><ion-icon name="add"></ion-icon></ion-button>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Players</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <app-explore-container name="Players page"></app-explore-container>
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let player of players">
+      <ion-avatar slot="start">
+        <img [src]="player.photo">
+      </ion-avatar>
+      <ion-label>
+      <h1>{{player.prenom}} {{player.nom}}</h1>
+      <p>{{player.poste}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>

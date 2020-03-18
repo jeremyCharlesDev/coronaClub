@@ -1,12 +1,38 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
+  <ion-toolbar color="primary">
+    <ion-title size="large">
       Home
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
+<<<<<<< HEAD
  
+=======
+  <div class="ion-text-center">
+    <h1 class="nameTeam">{{team.name}}</h1>
+    <img [src]="team.logo" alt="logo"/>
+  </div>
+
+  <ion-list class="ion-margin">
+    <ion-item>
+      <ion-icon name="location" class="ion-padding-end ion-margin-end"></ion-icon>
+      <p class="ion-padding-start ion-margin-start">{{team.adress}} <br>
+      {{team.zipCode}} {{team.city}}</p>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="call" class="ion-padding-end ion-margin-end"></ion-icon>
+      <p class="ion-padding-start ion-margin-start">{{team.phone}}</p>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="at" class="ion-padding-end ion-margin-end"></ion-icon>
+      <p class="ion-padding-start ion-margin-start">{{team.mail}}</p>
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="full" class="ion-padding-horizontal" (click)="updateHome(team)">MODIFIER</ion-button>
+  
+>>>>>>> 43fbb1e81b26f29ba748f7709a38e7b81bf82372
 
 </ion-content>

@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-start">Ajouter un joueur</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form #addJoueurs="ngForm">
+  <ion-card>
+    <ion-card-content>
+    <input
+    type="text"
+    id="newJoueur"
+    name="nom"
+    #nom="ngModel"
+    [(ngModel)]="newJoueur.nom"
+    required
+    placeholder="Nom du joueur"
+    >
+    <input
+    type="text"
+    id="newJoueur"
+    name="email"
+    #email="ngModel"
+    [(ngModel)]="newJoueur.email"
+    required
+    placeholder="Email du joueur"
+    >
+    <input
+    type="text"
+    id="newJoueur"
+    name="tel"
+    #tel="ngModel"
+    [(ngModel)]="newJoueur.tel"
+    required
+    placeholder="Téléphone du joueur"
+    >
+    <input
+    type="text"
+    id="newJoueur"
+    name="prenom"
+    #prenom="ngModel"
+    [(ngModel)]="newJoueur.prenom"
+    required
+    placeholder="Prénom du joueur"
+    >
+    <input
+    type="text"
+    id="newJoueur"
+    name="poste"
+    #poste="ngModel"
+    [(ngModel)]="newJoueur.poste"
+    required
+    placeholder="Poste du joueur"
+    >
+    <input
+    type="file"
+    id="newJoueur"
+    name="photo"
+    #photo="ngModel"
+    [(ngModel)]="newJoueur.photo"
+    required
+    placeholder="Photo du joueur"
+    >
+
+  </ion-card-content>
+</ion-card>
+<ion-button expand="full" (click)="addJoueur(nom.value, email.value, tel.value, prenom.value, poste.value, photo.value)" >Valider</ion-button>
+</form>
+</ion-content>

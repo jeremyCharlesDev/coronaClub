@@ -29,3 +29,20 @@
     margin: auto;
     margin-top: 1.5em;
   }
+
+ion-header ion-toolbar{
+    background-color: #D4001F;
+    color: #fff;
+    height: 4em;
+}
+
+body {
+  background: url(./assets/img/bg.jpg) no-repeat center/cover fixed;
+}
+ion-content {
+  --background: rgba(255, 255, 255, 0.8);
+}
+
+ion-toolbar ion-title{
+    font-size: 1.6em;
+}

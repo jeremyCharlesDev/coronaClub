@@ -4,6 +4,9 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AngularFirestoreCollection, AngularFirestoreDocument, AngularFirestore } from '@angular/fire/firestore';
+import { Plugins } from '@capacitor/core';
+
+const { Storage } = Plugins;
 
 
 
@@ -11,6 +14,7 @@ import { AngularFirestoreCollection, AngularFirestoreDocument, AngularFirestore 
   providedIn: 'root'
 })
 export class ContactService {
+  contactHome: any;
   contactCollectionRef: AngularFirestoreCollection<Contact>;
   contactDoc: AngularFirestoreDocument<Contact>;
   private contact: Array<Contact> = [];
@@ -39,6 +43,10 @@ export class ContactService {
     return this.contactDoc.valueChanges();
   }
 
+  getSelectedContact() {
+    return this.contactHome;
+  }
+
 
   updateContact(contact: Contact): Promise<any> {
     return this.contactCollectionRef.doc(contact.id).update({
@@ -51,5 +59,30 @@ export class ContactService {
       logo: contact.logo,
     });
   }
+
+  async storeLieux() {
+    return await Storage.set({
+      key: 'contact',
+      value: JSON.stringify(this.contact)
+    });
+  }
+
+
+  editContact(updateContact: Contact) {
+    // tslint:disable-next-line: prefer-for-of
+    for (let i = 0; i < this.contact.length; i++) {
+      if (this.contact[i].nom === updateContact.nom) {
+        this.contact[i].adresse = updateContact.adresse;
+        this.contact[i].codePostal = updateContact.codePostal;
+        this.contact[i].ville = updateContact.ville;
+        this.contact[i].email = updateContact.email;
+        this.contact[i].tel = updateContact.tel;
+        this.contact[i].logo = updateContact.logo;
+        break;
+      }
+    }
+    this.storeLieux();
+  }
+
 
 }

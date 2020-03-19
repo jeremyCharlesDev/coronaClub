@@ -4,6 +4,8 @@ import { ContactService } from './../../services/contact.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { NavController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-edit-home',
@@ -12,12 +14,14 @@ import { AngularFireStorage } from '@angular/fire/storage';
 })
 export class EditHomePage implements OnInit {
   contact: Contact;
+  contactModif: Contact;
 
   constructor(
       private route: ActivatedRoute,
       public contactService: ContactService,
       private router: Router,
-      private storage: AngularFireStorage
+      private storage: AngularFireStorage,
+      public navCtrl: NavController
   ) { }
 
 // ngOnInit(): void {
@@ -38,13 +42,19 @@ export class EditHomePage implements OnInit {
 // }
 
 ngOnInit() {
-  this.contact = this.contactService.getClub();
+  this.contactModif = this.contactService.getSelectedContact();
 }
 
 updateContact(updatedContact: Contact) {
   this.contactService.updateContact(updatedContact);
   this.router.navigate(['/home']);
 }
+
+editContact(updatedContact: Contact) {
+  this.contactService.editContact(updatedContact);
+  this.navCtrl.navigateBack('/home');
+}
+
 
 
 

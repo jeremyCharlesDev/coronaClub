@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Match } from '../models/match.model';
-import { tap, map } from 'rxjs/operators';
+import { Player } from '../models/player.model';
+import { map } from 'rxjs/operators';
 import { AngularFirestoreCollection, AngularFirestoreDocument, AngularFirestore } from '@angular/fire/firestore';
-import { AngularFireStorage } from '@angular/fire/storage';
 
 import { Plugins } from '@capacitor/core';
 const { Storage } = Plugins;
@@ -12,33 +12,46 @@ const { Storage } = Plugins;
   providedIn: 'root'
 })
 export class MatchService {
-  lieuCollectionRef: AngularFirestoreCollection<Match>;
+  matchCollectionRef: AngularFirestoreCollection<Match>;
+  playerCollectionRef: AngularFirestoreCollection<Player>;
   lieuDoc: AngularFirestoreDocument<Match>;
   matchSelected: Match;
   matchs: Array<Match> = [];
+  players: Player[];
 
   constructor(
-    private afs: AngularFirestore,
-    private storage: AngularFireStorage
-  ) {this.lieuCollectionRef = this.afs.collection<Match>('match'); }
+    private afs: AngularFirestore
+  ) {this.matchCollectionRef = this.afs.collection<Match>('match');
+  this.playerCollectionRef = this.afs.collection<Player>('user'); }
   // ###############################################################
   getMatch() {
     return this.matchSelected;
   }
   moreDetails(match: Match) {
     this.matchSelected = match;
-    console.log(this.matchSelected);
+    // console.log(this.matchSelected);
   }
   // ###############################################################
-  async addMatch(match: Match) {
-    this.matchs.push(match);
-    this.storeMatch();
+  addMatch(match: Match): Promise<any> {
+    return this.matchCollectionRef.add(match)
   }
   // ###############################################################
   getMatchs() {
-    return this.lieuCollectionRef.snapshotChanges().pipe(
+    return this.matchCollectionRef.snapshotChanges().pipe(
       map(actions => actions.map(a => {
        const data = a.payload.doc.data() as Match;
+       const id = a.payload.doc.id;
+       console.log(data);
+       
+       return {id, ...data};
+      }))
+    );
+  }
+  // ###############################################################
+  getPlayers() {
+    return this.playerCollectionRef.snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+       const data = a.payload.doc.data() as Player;
        const id = a.payload.doc.id;
        return {id, ...data};
       }))
@@ -62,7 +75,7 @@ export class MatchService {
           this.matchs[i].ville =updatedMatch.ville;
           this.matchs[i].localisation.lat =updatedMatch.localisation.lat;
           this.matchs[i].localisation.long =updatedMatch.localisation.long;
-          this.matchs[i].Player =updatedMatch.Player;
+          this.matchs[i].players =updatedMatch.players;
           break;
         }
       }

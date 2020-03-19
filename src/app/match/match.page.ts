@@ -20,11 +20,11 @@ export class MatchPage {
   async ionViewWillEnter() {
     this.matchService.getMatchs().subscribe(response => {
       this.matchs = response;
-      console.log(this.matchs);
+      // console.log(this.matchs);
     }, err => console.log(err));
   }
   addMatch() {
-    this.navController.navigateForward('match/ajout-match');
+    this.navController.navigateForward('./match/ajout-match');
   }
   manageMatch(match: Match) {
     this.matchService.moreDetails(match);

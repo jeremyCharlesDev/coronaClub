@@ -14,11 +14,30 @@
         <ion-input type="text" name="nom" ngModel required placeholder="Nom du match"> </ion-input>
       </ion-item>
       <ion-item>
-        <ion-input type="text" name="date" ngModel placeholder="Date"> </ion-input>
+        <ion-datetime  name="date" ngModel placeholder="Selectionner une date" required> </ion-datetime>
       </ion-item>
       <ion-item>
-        <ion-input type="text" name="ville" ngModel placeholder="Lieu"> </ion-input>
+        <ion-input type="text" name="ville" ngModel placeholder="Lieu" required> </ion-input>
       </ion-item>
+      <ion-title color="primary">Joueurs</ion-title>
+      <ion-item *ngFor="let p of allPlayers; let i = index;">
+        <ion-checkbox
+        id="p.id{{ i }}"
+        class="checked"
+        name="p.id{{ i }}"
+        [value]="p.id"
+        [checked]="testPlayer(p.id)"
+        [disabled]="checkNumberOfPlayers(p.id)"
+        (ionChange)="editNumberOfPlayers(p.id)"
+        >
+      </ion-checkbox>
+              <ion-label style="margin-left: 1em;">
+                <ion-avatar slot="start">
+                  <img [src]="p.photo">
+                </ion-avatar>
+              <h2>{{p.nom}} {{p.prenom}}</h2><p>{{p.poste}}</p>
+              </ion-label>
+  </ion-item>
       <ion-button type="submit" expand="block" [disabled]="!addForm.valid">Valider</ion-button>
     </form>
   </div>

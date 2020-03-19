@@ -1,3 +1,4 @@
+import { AuthGuard } from './../auth.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
@@ -24,6 +25,7 @@ const routes: Routes = [
       },
       {
         path: 'match',
+        canActivate: [AuthGuard],
         children: [
           {
             path: '',
@@ -44,6 +46,7 @@ const routes: Routes = [
       },
       {
         path: 'players',
+        canActivate: [AuthGuard],
         children: [
           {
             path: '',

@@ -55,17 +55,16 @@ export class AjoutMatchPage {
     numberOfPlayers === 10 && this.testPlayer(playerID)) {
       return true;
     }
-      return false;
+    return false;
   }
   // ##############################################################################################
   editNumberOfPlayers(playerID: string) {
     if (!this.newMatch.players.includes(playerID)) {
       this.newMatch.players.push(playerID);
-    }else{
+    } else {
       const indexPlayer = this.newMatch.players.indexOf(playerID);
       this.newMatch.players.splice(indexPlayer, 1);
     }
     console.log(this.newMatch.players);
-    
   }
 }

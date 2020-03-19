@@ -58,11 +58,6 @@ const routes: Routes = [
             loadChildren: () =>
               import('../players/add-players/add-players.module').then(m => m.AddPlayersPageModule)
           },
-          {
-            path: 'gestion-players',
-            loadChildren: () =>
-              import('../players/gestion-players/gestion-players.module').then(m => m.GestionPlayersPageModule)
-          }
         ]
       },
       {

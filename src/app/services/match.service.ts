@@ -22,7 +22,7 @@ export class MatchService {
   constructor(
     private afs: AngularFirestore
   ) {this.matchCollectionRef = this.afs.collection<Match>('match');
-  this.playerCollectionRef = this.afs.collection<Player>('user'); }
+     this.playerCollectionRef = this.afs.collection<Player>('user'); }
   // ###############################################################
   getMatch() {
     return this.matchSelected;
@@ -33,7 +33,7 @@ export class MatchService {
   }
   // ###############################################################
   addMatch(match: Match): Promise<any> {
-    return this.matchCollectionRef.add(match)
+    return this.matchCollectionRef.add(match);
   }
   // ###############################################################
   getMatchs() {
@@ -42,7 +42,7 @@ export class MatchService {
        const data = a.payload.doc.data() as Match;
        const id = a.payload.doc.id;
        console.log(data);
-       
+
        return {id, ...data};
       }))
     );

@@ -29,7 +29,6 @@ export class MatchService {
   }
   moreDetails(match: Match) {
     this.matchSelected = match;
-    // console.log(this.matchSelected);
   }
   // ###############################################################
   addMatch(match: Match): Promise<any> {
@@ -41,10 +40,9 @@ export class MatchService {
       map(actions => actions.map(a => {
        const data = a.payload.doc.data() as Match;
        const id = a.payload.doc.id;
-       console.log(data);
-       
        return {id, ...data};
       }))
+      
     );
   }
   // ###############################################################
@@ -58,24 +56,11 @@ export class MatchService {
     );
   }
   // ###############################################################
-  removeMatch(match: Match) {
-    for (let i = 0; i < this.matchs.length; i++) {
-      if (this.matchs[i].nom === match.nom) {
-        this.matchs.splice(i, 1);
-        break;
-      }
-    }
-    this.storeMatch();
-  }
-  // ###############################################################
   editMatch(updatedMatch: Match) {
       for (let i = 0; i < this.matchs.length; i++) {
         if (this.matchs[i].nom === updatedMatch.nom) {
           this.matchs[i].date =updatedMatch.date;
           this.matchs[i].ville =updatedMatch.ville;
-          this.matchs[i].localisation.lat =updatedMatch.localisation.lat;
-          this.matchs[i].localisation.long =updatedMatch.localisation.long;
-          this.matchs[i].players =updatedMatch.players;
           break;
         }
       }

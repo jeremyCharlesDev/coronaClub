@@ -2,7 +2,7 @@ import { Player } from './player.model';
 
 
 export class Match {
-    id: String;
+    id?: String;
 	nom: String;
 	date: any; 
 	ville: String;

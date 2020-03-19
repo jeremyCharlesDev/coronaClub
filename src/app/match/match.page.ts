@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Match } from '../models/match.model';
 import { MatchService } from '../services/match.service';
@@ -9,12 +9,18 @@ import { MatchService } from '../services/match.service';
   styleUrls: ['./match.page.scss'],
 })
 
-export class MatchPage {
+export class MatchPage implements OnInit{
   matchs: Array<Match>;
   constructor(
     private matchService: MatchService,
     private navController: NavController
   ) { }
+  ngOnInit() {
+    this.matchService.getMatchs().subscribe(response => {
+      this.matchs= response;
+      console.log(this.matchs);
+    }, err => console.log(err));
+  }
   searchMatch = '';
   resultMatch: any;
   async ionViewWillEnter() {
@@ -23,11 +29,8 @@ export class MatchPage {
       // console.log(this.matchs);
     }, err => console.log(err));
   }
-  addMatch() {
-    this.navController.navigateForward('./match/ajout-match');
-  }
   manageMatch(match: Match) {
     this.matchService.moreDetails(match);
-    this.navController.navigateForward('match/gestion-match');
+    console.log(match);
   }
 }

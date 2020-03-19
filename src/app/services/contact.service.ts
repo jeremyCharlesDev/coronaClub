@@ -13,6 +13,8 @@ import { AngularFirestoreCollection, AngularFirestoreDocument, AngularFirestore 
 export class ContactService {
   contactCollectionRef: AngularFirestoreCollection<Contact>;
   contactDoc: AngularFirestoreDocument<Contact>;
+  private contact: Array<Contact> = [];
+
 
 
   constructor(

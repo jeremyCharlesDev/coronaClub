@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Contact } from './../models/contact.model';
 import { ContactService } from './../services/contact.service';
 
+import { AuthenticateService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -22,18 +24,26 @@ export class HomePage implements OnInit {
   contact: Contact[];
 
   constructor(
-    public contactService: ContactService
+    public contactService: ContactService,
+    private authenticateService: AuthenticateService,
+    private router: Router
     ) {}
 
   ngOnInit() {
     this.getContact();
   }
 
+  async logout() {
+    await this.authenticateService.logout();
+    this.authenticateService.isLog = false;
+    this.router.navigate(['/tabs/home']);
+  }
   getContact() {
     this.contactService.getClub().subscribe(response => {
       this.contact = response;
       console.log(this.contact);
     }, err => console.log(err));
-  }
+
+}
 
 }

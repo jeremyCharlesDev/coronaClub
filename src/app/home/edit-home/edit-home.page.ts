@@ -15,7 +15,7 @@ export class EditHomePage implements OnInit {
 
   constructor(
       private route: ActivatedRoute,
-      private contactService: ContactService,
+      public contactService: ContactService,
       private router: Router,
       private storage: AngularFireStorage
   ) { }

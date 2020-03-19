@@ -23,20 +23,19 @@ export class AddPlayersPage implements OnInit {
   ngOnInit() {
   }
 
-    addJoueur(nom: string, email: string, tel: string, prenom: string, poste: string, photo: string) {
+    addJoueur(nom: string, email: string, tel: string, prenom: string, poste: string) {
     this.newJoueur.nom = nom;
     this.newJoueur.email = email;
     this.newJoueur.tel = tel;
     this.newJoueur.prenom = prenom;
     this.newJoueur.poste = poste;
-    this.newJoueur.photo = photo;
     console.log(this.newJoueur);
     this.playerService.addPlayer(this.newJoueur).then(() => {
-      this.router.navigate(['/players']);
+      this.router.navigate(['/tabs/players']);
     });
     }
 
-    // addPhoto(event) {
-    //   this.playerService.uploadFile(event);
-    // }
+    addPhoto(event) {
+      this.playerService.uploadFile(event);
+    }
   }

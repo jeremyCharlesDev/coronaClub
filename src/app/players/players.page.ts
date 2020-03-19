@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Player } from './../models/player.model';
 import { PlayersService } from './../services/players.service';
 import { Component, OnInit } from '@angular/core';
@@ -9,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlayersPage implements OnInit {
 
-  constructor(public playerService: PlayersService) {}
+  constructor(public playerService: PlayersService, private router: Router) {}
   players: Player[];
 
   ngOnInit() {
@@ -22,5 +23,7 @@ export class PlayersPage implements OnInit {
       console.log(this.players);
     }, err => console.log(err));
   }
-
+  selectJoueur(id: string) {
+    this.router.navigate(['/tabs/players/gestion-joueurs', id]);
+  }
 }

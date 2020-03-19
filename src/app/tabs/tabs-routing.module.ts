@@ -1,3 +1,4 @@
+import { AuthGuard } from './../auth.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
@@ -24,11 +25,17 @@ const routes: Routes = [
             path: 'edit-home',
             loadChildren: () =>
               import('../home/edit-home/edit-home.module').then(m => m.EditHomePageModule)
+          },
+          {
+            path: 'forgotpw',
+            loadChildren: () =>
+              import('../home/forgotpw/forgotpw.module').then(m => m.ForgotpwPageModule)
           }
         ]
       },
       {
         path: 'match',
+        canActivate: [AuthGuard],
         children: [
           {
             path: '',
@@ -49,6 +56,7 @@ const routes: Routes = [
       },
       {
         path: 'players',
+        canActivate: [AuthGuard],
         children: [
           {
             path: '',
@@ -59,6 +67,13 @@ const routes: Routes = [
             path: 'add-players',
             loadChildren: () =>
               import('../players/add-players/add-players.module').then(m => m.AddPlayersPageModule)
+          },
+          {
+            path: 'gestion-players',
+            children: [
+              {path: ':id', loadChildren: () =>
+              import('../players/gestion-players/gestion-players.module').then(m => m.GestionPlayersPageModule)},
+             ]
           }
         ]
       },

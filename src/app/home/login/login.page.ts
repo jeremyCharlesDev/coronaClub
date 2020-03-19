@@ -46,4 +46,8 @@ export class LoginPage implements OnInit {
     });
   }
 
+  resetPwd() {
+    this.navCtrl.navigateForward('tabs/home/forgotpw');
+  }
+
 }

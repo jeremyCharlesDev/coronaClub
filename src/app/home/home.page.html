@@ -4,7 +4,7 @@
       Home
     </ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="logout()">
+      <ion-button [hidden]="!authenticateService.isLog" (click)="logout()">
         <ion-icon name="log-out"></ion-icon>
       </ion-button>
     </ion-buttons>

@@ -17,7 +17,6 @@ export class EditHomePage implements OnInit {
   contactModif: Contact;
 
   constructor(
-      private route: ActivatedRoute,
       public contactService: ContactService,
       private router: Router,
       private storage: AngularFireStorage,
@@ -52,7 +51,7 @@ updateContact(updatedContact: Contact) {
 
 editContact(updatedContact: Contact) {
   this.contactService.editContact(updatedContact);
-  this.navCtrl.navigateBack('/home');
+  this.router.navigate(['/home']);
 }
 
 

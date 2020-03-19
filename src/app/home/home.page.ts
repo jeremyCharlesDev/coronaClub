@@ -4,6 +4,7 @@ import { ContactService } from './../services/contact.service';
 
 import { AuthenticateService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -26,6 +27,7 @@ export class HomePage implements OnInit {
   constructor(
     public contactService: ContactService,
     private authenticateService: AuthenticateService,
+    private alertCtrl: AlertController,
     private router: Router
     ) {}
 
@@ -33,10 +35,32 @@ export class HomePage implements OnInit {
     this.getContact();
   }
 
-  async logout() {
-    await this.authenticateService.logout();
-    this.authenticateService.isLog = false;
-    this.router.navigate(['/tabs/home']);
+  logout() {
+    this.authenticateService.logout().then(
+      async () => {
+        const alert = await this.alertCtrl.create({
+          message: 'Vous êtes déconnecté !',
+          buttons: [
+            {
+              text: 'Ok',
+              role: 'Annulé',
+            handler: () => {
+              this.router.navigate(['/tabs/home']);
+             },
+            },
+          ],
+        });
+        await alert.present();
+        this.authenticateService.isLog = false;
+      },
+      async error => {
+        const errorAlert = await this.alertCtrl.create({
+          message: error.message,
+          buttons: [{ text: 'Ok', role: 'Annulé' }],
+        });
+        await errorAlert.present();
+      }
+    );
   }
   getContact() {
     this.contactService.getClub().subscribe(response => {

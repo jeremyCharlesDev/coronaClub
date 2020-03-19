@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthenticateService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -18,16 +19,44 @@ export class HomePage {
     logo : './../../assets/img/logo.png'
   };
 
-
   constructor(
-    private authenticateService: AuthenticateService,
+    public authenticateService: AuthenticateService,
+    private alertCtrl: AlertController,
     private router: Router
   ) {}
 
-  async logout() {
-    await this.authenticateService.logout();
-    this.authenticateService.isLog = false;
-    this.router.navigate(['/tabs/home']);
+  logout() {
+    this.authenticateService.logout().then(
+      async () => {
+        const alert = await this.alertCtrl.create({
+          message: 'Voulez-vous vous déconnecter !',
+          buttons: [
+            {
+              text: 'Annuler',
+              role: 'cancel',
+              handler: () => {
+                this.authenticateService.isLog = true;
+               },
+            },
+            {
+              text: 'Ok',
+            handler: () => {
+              this.router.navigate(['/tabs/home']);
+             },
+            },
+          ],
+        });
+        await alert.present();
+        this.authenticateService.isLog = false;
+      },
+      async error => {
+        const errorAlert = await this.alertCtrl.create({
+          message: error.message,
+          buttons: [{ text: 'Ok', role: 'cancel' }],
+        });
+        await errorAlert.present();
+      }
+    );
   }
 
 }

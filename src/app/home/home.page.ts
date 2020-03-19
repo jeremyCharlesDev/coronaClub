@@ -29,11 +29,17 @@ export class HomePage {
     this.authenticateService.logout().then(
       async () => {
         const alert = await this.alertCtrl.create({
-          message: 'Vous êtes déconnecté !',
+          message: 'Voulez-vous vous déconnecter !',
           buttons: [
             {
+              text: 'Annuler',
+              role: 'cancel',
+              handler: () => {
+                this.authenticateService.isLog = true;
+               },
+            },
+            {
               text: 'Ok',
-              role: 'Annulé',
             handler: () => {
               this.router.navigate(['/tabs/home']);
              },
@@ -46,7 +52,7 @@ export class HomePage {
       async error => {
         const errorAlert = await this.alertCtrl.create({
           message: error.message,
-          buttons: [{ text: 'Ok', role: 'Annulé' }],
+          buttons: [{ text: 'Ok', role: 'cancel' }],
         });
         await errorAlert.present();
       }

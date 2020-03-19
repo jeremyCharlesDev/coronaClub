@@ -29,7 +29,6 @@ export class ForgotpwPage implements OnInit {
           buttons: [
             {
               text: 'Ok',
-              role: 'Annulé',
             handler: () => {
               this.router.navigateByUrl('tabs/home');
              },
@@ -41,7 +40,7 @@ export class ForgotpwPage implements OnInit {
       async error => {
         const errorAlert = await this.alertCtrl.create({
           message: error.message,
-          buttons: [{ text: 'Ok', role: 'Annulé' }],
+          buttons: [{ text: 'Ok', role: 'cancel' }],
         });
         await errorAlert.present();
       }

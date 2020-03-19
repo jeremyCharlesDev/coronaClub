@@ -25,7 +25,7 @@ const routes: Routes = [
       },
       {
         path: 'match',
-        canActivate: [AuthGuard],
+        // canActivate: [AuthGuard],
         children: [
           {
             path: '',
@@ -46,7 +46,7 @@ const routes: Routes = [
       },
       {
         path: 'players',
-        canActivate: [AuthGuard],
+        // canActivate: [AuthGuard],
         children: [
           {
             path: '',

@@ -10,5 +10,5 @@ export class Match {
 		lat: Number,
 		long: Number
 	}
-	Player: Player[]
+	players?: string[]
 }

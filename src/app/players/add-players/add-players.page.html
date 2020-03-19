@@ -24,6 +24,16 @@
     <input
     type="text"
     id="newJoueur"
+    name="prenom"
+    #prenom="ngModel"
+    [(ngModel)]="newJoueur.prenom"
+    required
+    placeholder="Prénom du joueur"
+    >
+    <br>
+    <input
+    type="text"
+    id="newJoueur"
     name="email"
     #email="ngModel"
     [(ngModel)]="newJoueur.email"
@@ -41,27 +51,20 @@
     placeholder="Téléphone du joueur"
     >
     <br>
-    <input
-    type="text"
-    id="newJoueur"
-    name="prenom"
-    #prenom="ngModel"
-    [(ngModel)]="newJoueur.prenom"
-    required
-    placeholder="Prénom du joueur"
-    >
-    <br>
-    <input
-    type="text"
-    id="newJoueur"
-    name="poste"
-    #poste="ngModel"
-    [(ngModel)]="newJoueur.poste"
-    required
-    placeholder="Poste du joueur"
-    >
+    <ion-list>
+  <label for="poste">Postes</label>
+  <ion-item *ngFor="let p of poste; let i=index">
+    <ion-label>{{p.nom}}</ion-label>
+    <input type="radio" name="poste" id="poste" #poste ng-model=""  [value]="i" (click)="PosteValue(i)" slot="end">
+  </ion-item>
+  <!-- <ion-item>
+  <ion-select ng-model="mySelect" (ng-change)="showSelectValue(mySelect)">
+    <ion-select-option *ngFor="let p of poste" name="poste" id="newJoueur" [value]="p">{{p.nom}}</ion-select-option>
+  </ion-select>
+</ion-item> -->
+</ion-list>
   </ion-card-content>
 </ion-card>
-<ion-button expand="full" (click)="addJoueur(nom.value, email.value, tel.value, prenom.value, poste.value)" >Valider</ion-button>
+<ion-button expand="full" (click)='addJoueur(nom.value, email.value, tel.value, prenom.value,poste.value)'>Valider</ion-button>
 </form>
 </ion-content>

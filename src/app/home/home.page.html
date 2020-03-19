@@ -7,28 +7,28 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <div class="ion-text-center">
-    <h1 class="nameTeam">{{team.name}}</h1>
-    <img [src]="team.logo" alt="logo"/>
+  <div class="ion-text-center" *ngFor="let c of contact">
+    <h1 class="nameTeam">{{c.nom}}</h1>
+    <img [src]="c.logo" alt="logo"/>
   </div>
 
-  <ion-list class="ion-margin">
+  <ion-list class="ion-margin" *ngFor="let c of contact">
     <ion-item>
       <ion-icon name="location" class="ion-padding-end ion-margin-end"></ion-icon>
-      <p class="ion-padding-start ion-margin-start">{{team.adress}} <br>
-      {{team.zipCode}} {{team.city}}</p>
+      <p class="ion-padding-start ion-margin-start">{{c.adresse}}<br>
+      {{c.codePostal}} {{c.ville}}</p>
     </ion-item>
     <ion-item>
       <ion-icon name="call" class="ion-padding-end ion-margin-end"></ion-icon>
-      <p class="ion-padding-start ion-margin-start">{{team.phone}}</p>
+      <p class="ion-padding-start ion-margin-start">{{c.tel}}</p>
     </ion-item>
     <ion-item>
       <ion-icon name="at" class="ion-padding-end ion-margin-end"></ion-icon>
-      <p class="ion-padding-start ion-margin-start">{{team.mail}}</p>
+      <p class="ion-padding-start ion-margin-start">{{c.email}}</p>
     </ion-item>
   </ion-list>
 
-  <ion-button expand="full" class="ion-padding-horizontal" (click)="updateHome(team)">MODIFIER</ion-button>
+  <ion-button expand="full" class="ion-padding-horizontal" [routerLink]="['/tabs/home/edit-home']">MODIFIER</ion-button>
   
 
 </ion-content>

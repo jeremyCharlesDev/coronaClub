@@ -23,7 +23,7 @@ export class HomePage implements OnInit {
   //   logo : './../../assets/img/logo.png'
   // };
   contact: Contact[];
-  team: Contact = null;
+  // team: Contact = null;
 
   constructor(
     private route: ActivatedRoute,

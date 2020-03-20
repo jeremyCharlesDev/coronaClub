@@ -10,6 +10,7 @@ import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/fire
   styleUrls: ['./gestion-match.page.scss'],
 })
 export class GestionMatchPage implements OnInit {
+  match: Match;
   matchModif: Match
   matchCollectionRef: AngularFirestoreCollection<Match>;
   constructor(
@@ -22,14 +23,30 @@ export class GestionMatchPage implements OnInit {
   ngOnInit() {
     this.matchModif = this.matchService.getMatch();
   }
-  editMatch(updatedMatch: Match) {
-    this.matchService.editMatch(updatedMatch);
-  }
-  removeMatch(id: string): Promise<any> {
-    return this.matchCollectionRef.doc(id).delete();
+  editMatch() {
+    this.matchService.editMatch(this.matchModif).then(() => {
+        console.log('match modifié avec succès');
+        //toast ici avec un erreur aussi :)
+
+        
+    })
+    console.log(this.matchModif);
+    
   }
   // #############################################################################################################
-  async supprimerMatch(index) {
+  majMatch(match: Match) {
+    this.matchService.matchClique = match;
+    this.navController.navigateForward('/tabs/match/gestion-match');
+  }
+  // #############################################################################################################
+  removeMatch(id: string) {
+    this.matchService.deleteMatch(id).then(() => {
+      this.navController.navigateBack('/tabs/match');
+    });
+  }
+  // #############################################################################################################
+  async supprimerMatch(id: string) {
+
     const alert = await this.alertCtrl.create({
       header: "Suppression",
       message: " Etes vous sûr de vouloir supprimer ce match ?",
@@ -40,12 +57,11 @@ export class GestionMatchPage implements OnInit {
           cssClass: "warning"
         }, {
           text: 'Oui',
-          handler: () => {this.removeMatch(index)}
+          handler: () => {this.removeMatch(id)}
         }
       ]
     });
     await alert.present()
-    await this.navController.navigateBack(['./tabs/match'])
   }
 
 }

@@ -2,13 +2,13 @@ import { Player } from './player.model';
 
 
 export class Match {
-    id?: String;
-	nom: String;
+    id?: string;
+	nom: string;
 	date: any; 
-	ville: String;
+	ville: string;
 	localisation?: {
-		lat: Number,
-		long: Number
+		lat: number,
+		long: number
 	}
 	players?: string[]
 }

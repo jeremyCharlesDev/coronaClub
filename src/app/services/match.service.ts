@@ -18,6 +18,7 @@ export class MatchService {
   matchSelected: Match;
   matchs: Array<Match> = [];
   players: Player[];
+  matchClique: Match;
 
   constructor(
     private afs: AngularFirestore
@@ -33,6 +34,10 @@ export class MatchService {
   // ###############################################################
   addMatch(match: Match): Promise<any> {
     return this.matchCollectionRef.add(match)
+  }
+  // ###############################################################
+  deleteMatch(id: string): Promise<any>{
+    return this.afs.collection('match').doc(id).delete();
   }
   // ###############################################################
   getMatchs() {
@@ -57,19 +62,9 @@ export class MatchService {
   }
   // ###############################################################
   editMatch(updatedMatch: Match) {
-      for (let i = 0; i < this.matchs.length; i++) {
-        if (this.matchs[i].nom === updatedMatch.nom) {
-          this.matchs[i].date =updatedMatch.date;
-          this.matchs[i].ville =updatedMatch.ville;
-          break;
-        }
-      }
-      this.storeMatch();
-  }
-  public async storeMatch() {
-    return await Storage.set({
-      key: 'lieux',
-      value: JSON.stringify(this.matchs)
-    });
+    console.log(updatedMatch);
+    const id = updatedMatch.id;
+    delete updatedMatch.id;
+    return this.matchCollectionRef.doc(id).update({...updatedMatch});
   }
 }

@@ -31,6 +31,7 @@ export class MatchPage implements OnInit{
   }
   manageMatch(match: Match) {
     this.matchService.moreDetails(match);
+    this.navController.navigateForward('/tabs/match/gestion-match');
     console.log(match);
   }
 }

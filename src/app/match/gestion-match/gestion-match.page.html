@@ -4,7 +4,7 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-button (click)="supprimerMatch(matchModif)">
+      <ion-button (click)="supprimerMatch(matchModif.id)">
         <ion-icon size="large" name="trash"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -14,7 +14,7 @@
 
 <ion-content>
   <div class="container-match">
-    <form #editForm="ngForm" (ngSubmit)="editMatch(editForm.value)">
+    <form #editForm="ngForm" (ngSubmit)="editMatch()">
       <ion-item>
         <ion-input type="text" name="nom" [(ngModel)]="matchModif.nom" required placeholder="Nom du match"> </ion-input>
       </ion-item>

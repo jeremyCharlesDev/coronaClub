@@ -15,6 +15,6 @@ import { EditHomePage } from './edit-home.page';
     IonicModule,
     EditHomePageRoutingModule
   ],
-  declarations: [EditHomePage]
+  declarations: [EditHomePage],
 })
 export class EditHomePageModule {}

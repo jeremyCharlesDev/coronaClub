@@ -22,6 +22,11 @@ const routes: Routes = [
               import('../home/login/login.module').then(m => m.LoginPageModule)
           },
           {
+            path: 'edit-home',
+            loadChildren: () =>
+              import('../home/edit-home/edit-home.module').then(m => m.EditHomePageModule)
+          },
+          {
             path: 'forgotpw',
             loadChildren: () =>
               import('../home/forgotpw/forgotpw.module').then(m => m.ForgotpwPageModule)
@@ -63,13 +68,6 @@ const routes: Routes = [
             loadChildren: () =>
               import('../players/add-players/add-players.module').then(m => m.AddPlayersPageModule)
           },
-          {
-            path: 'gestion-players',
-            children: [
-              {path: ':id', loadChildren: () =>
-              import('../players/gestion-players/gestion-players.module').then(m => m.GestionPlayersPageModule)},
-             ]
-          }
         ]
       },
       {

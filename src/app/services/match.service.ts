@@ -18,22 +18,26 @@ export class MatchService {
   matchSelected: Match;
   matchs: Array<Match> = [];
   players: Player[];
+  matchClique: Match;
 
   constructor(
     private afs: AngularFirestore
   ) {this.matchCollectionRef = this.afs.collection<Match>('match');
-  this.playerCollectionRef = this.afs.collection<Player>('user'); }
+     this.playerCollectionRef = this.afs.collection<Player>('user'); }
   // ###############################################################
   getMatch() {
     return this.matchSelected;
   }
   moreDetails(match: Match) {
     this.matchSelected = match;
-    // console.log(this.matchSelected);
   }
   // ###############################################################
   addMatch(match: Match): Promise<any> {
-    return this.matchCollectionRef.add(match)
+    return this.matchCollectionRef.add(match);
+  }
+  // ###############################################################
+  deleteMatch(id: string): Promise<any> {
+    return this.afs.collection('match').doc(id).delete();
   }
   // ###############################################################
   getMatchs() {
@@ -41,8 +45,6 @@ export class MatchService {
       map(actions => actions.map(a => {
        const data = a.payload.doc.data() as Match;
        const id = a.payload.doc.id;
-       console.log(data);
-       
        return {id, ...data};
       }))
     );
@@ -58,33 +60,10 @@ export class MatchService {
     );
   }
   // ###############################################################
-  removeMatch(match: Match) {
-    for (let i = 0; i < this.matchs.length; i++) {
-      if (this.matchs[i].nom === match.nom) {
-        this.matchs.splice(i, 1);
-        break;
-      }
-    }
-    this.storeMatch();
-  }
-  // ###############################################################
   editMatch(updatedMatch: Match) {
-      for (let i = 0; i < this.matchs.length; i++) {
-        if (this.matchs[i].nom === updatedMatch.nom) {
-          this.matchs[i].date =updatedMatch.date;
-          this.matchs[i].ville =updatedMatch.ville;
-          this.matchs[i].localisation.lat =updatedMatch.localisation.lat;
-          this.matchs[i].localisation.long =updatedMatch.localisation.long;
-          this.matchs[i].players =updatedMatch.players;
-          break;
-        }
-      }
-      this.storeMatch();
-  }
-  public async storeMatch() {
-    return await Storage.set({
-      key: 'lieux',
-      value: JSON.stringify(this.matchs)
-    });
+    console.log(updatedMatch);
+    const id = updatedMatch.id;
+    delete updatedMatch.id;
+    return this.matchCollectionRef.doc(id).update({...updatedMatch});
   }
 }

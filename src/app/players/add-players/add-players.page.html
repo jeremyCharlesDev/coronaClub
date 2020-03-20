@@ -11,57 +11,72 @@
   <form #addJoueurs="ngForm">
   <ion-card>
     <ion-card-content>
+    <ion-row>
+    <ion-col size="6">
     <input
     type="text"
     id="newJoueur"
     name="nom"
     #nom="ngModel"
+    class="inputWidth"
     [(ngModel)]="newJoueur.nom"
     required
     placeholder="Nom du joueur"
     >
-    <br>
-    <input
-    type="text"
-    id="newJoueur"
-    name="email"
-    #email="ngModel"
-    [(ngModel)]="newJoueur.email"
-    required
-    placeholder="Email du joueur"
-    >
-    <br>
-    <input
-    type="text"
-    id="newJoueur"
-    name="tel"
-    #tel="ngModel"
-    [(ngModel)]="newJoueur.tel"
-    required
-    placeholder="Téléphone du joueur"
-    >
-    <br>
+  </ion-col>
+  <ion-col size="6">
     <input
     type="text"
     id="newJoueur"
     name="prenom"
     #prenom="ngModel"
+    class="inputWidth"
     [(ngModel)]="newJoueur.prenom"
     required
     placeholder="Prénom du joueur"
     >
-    <br>
+  </ion-col>
+  </ion-row>
+  <ion-row>
+     <ion-col size="6">
     <input
     type="text"
     id="newJoueur"
-    name="poste"
-    #poste="ngModel"
-    [(ngModel)]="newJoueur.poste"
+    name="email"
+    #email="ngModel"
+    class="inputWidth"
+    [(ngModel)]="newJoueur.email"
     required
-    placeholder="Poste du joueur"
+    placeholder="Email du joueur"
     >
+  </ion-col>
+    <ion-col size="6">
+    <input
+    type="text"
+    id="newJoueur"
+    name="tel"
+    #tel="ngModel"
+    class="inputWidth"
+    [(ngModel)]="newJoueur.tel"
+    required
+    placeholder="Téléphone du joueur"
+    >
+    </ion-col>
+  </ion-row>
+    <ion-list>
+  <label for="poste">Postes</label>
+  <ion-item *ngFor="let p of poste; let i=index">
+    <ion-label>{{p.nom}}</ion-label>
+    <input type="radio" [value]="p.nom" class="radio" (click)="PosteValue(p.nom)" slot="end">
+  </ion-item>
+  <!-- <ion-item>
+  <ion-select ng-model="mySelect" (ng-change)="showSelectValue(mySelect)">
+    <ion-select-option *ngFor="let p of poste" name="poste" id="newJoueur" [value]="p">{{p.nom}}</ion-select-option>
+  </ion-select>
+</ion-item> -->
+</ion-list>
   </ion-card-content>
 </ion-card>
-<ion-button expand="full" (click)="addJoueur(nom.value, email.value, tel.value, prenom.value, poste.value)" >Valider</ion-button>
+<ion-button expand="full" (click)='addJoueur(nom.value, email.value, tel.value, prenom.value)'>Valider</ion-button>
 </form>
 </ion-content>

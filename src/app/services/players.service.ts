@@ -4,11 +4,13 @@ import { tap, map, finalize } from 'rxjs/operators';
 import { AngularFirestoreCollection, AngularFirestoreDocument, AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
+import { Poste } from '../models/poste.model';
 @Injectable({
   providedIn: 'root'
 })
 export class PlayersService {
   playerCollectionRef: AngularFirestoreCollection<Player>;
+  posteCollectionRef: AngularFirestoreCollection<Poste>;
   playerDoc: AngularFirestoreDocument<Player>;
   uploadPercent: Observable<number>;
   downloadUrl: Observable<string>;
@@ -16,11 +18,21 @@ export class PlayersService {
   constructor(private afs: AngularFirestore,
               private storage: AngularFireStorage) {
       this.playerCollectionRef = this.afs.collection<Player>('user');
+      this.posteCollectionRef = this.afs.collection<Poste>('poste');
    }
    getAllJoueurs() {
     return this.playerCollectionRef.snapshotChanges().pipe(
       map(actions => actions.map(a => {
        const data = a.payload.doc.data() as Player;
+       const id = a.payload.doc.id;
+       return {id, ...data};
+      }))
+    );
+  }
+  getPlayerPoste() {
+    return this.posteCollectionRef.snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+       const data = a.payload.doc.data() as Poste;
        const id = a.payload.doc.id;
        return {id, ...data};
       }))

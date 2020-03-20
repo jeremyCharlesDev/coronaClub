@@ -11,7 +11,6 @@ import { Player } from 'src/app/models/player.model';
 })
 export class AjoutMatchPage {
   newMatch: Match = {
-    id: '',
     nom : '',
     date: '',
     ville: '',
@@ -23,6 +22,7 @@ export class AjoutMatchPage {
   };
   match: Match;
   allPlayers: Array<Player>;
+  allMatchs: Array<Match>;
   playerSelected: string[];
   constructor(
     private matchService: MatchService,
@@ -33,6 +33,10 @@ export class AjoutMatchPage {
     this.matchService.getPlayers().subscribe(response => {
       this.allPlayers = response;
       console.log(this.allPlayers);
+    }, err => console.log(err));
+    this.matchService.getMatchs().subscribe(response => {
+      this.allMatchs = response;
+      console.log(this.allMatchs);
     }, err => console.log(err));
   }
   addMatch(values) {
@@ -55,17 +59,16 @@ export class AjoutMatchPage {
     numberOfPlayers === 10 && this.testPlayer(playerID)) {
       return true;
     }
-      return false;
+    return false;
   }
   // ##############################################################################################
   editNumberOfPlayers(playerID: string) {
     if (!this.newMatch.players.includes(playerID)) {
       this.newMatch.players.push(playerID);
-    }else{
+    } else {
       const indexPlayer = this.newMatch.players.indexOf(playerID);
       this.newMatch.players.splice(indexPlayer, 1);
     }
     console.log(this.newMatch.players);
-    
   }
 }

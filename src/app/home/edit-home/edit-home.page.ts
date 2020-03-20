@@ -83,7 +83,7 @@ onSubmit(): void {
     this.router.navigate(['tabs/home']);
   }, err => console.log(err));
 
-  this.router.navigate(['tabs/home']);
+  this.navCtrl.navigateBack('tabs/home');
 }
 
 uploadFile(event) {

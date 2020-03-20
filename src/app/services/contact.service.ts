@@ -1,7 +1,7 @@
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Contact } from '../models/contact.model';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AngularFirestoreCollection, AngularFirestoreDocument, AngularFirestore } from '@angular/fire/firestore';
 import { Plugins } from '@capacitor/core';

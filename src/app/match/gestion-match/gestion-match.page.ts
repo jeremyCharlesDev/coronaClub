@@ -3,6 +3,7 @@ import { Match } from 'src/app/models/match.model';
 import { MatchService } from 'src/app/services/match.service';
 import { NavController, AlertController } from '@ionic/angular';
 import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
+import { Player } from 'src/app/models/player.model';
 
 @Component({
   selector: 'app-gestion-match',
@@ -13,16 +14,22 @@ export class GestionMatchPage implements OnInit {
   match: Match;
   matchModif: Match
   matchCollectionRef: AngularFirestoreCollection<Match>;
+  allPlayers: Array<Player>;
   constructor(
     public matchService: MatchService,
     public navController: NavController,
     private alertCtrl: AlertController,
     private afs: AngularFirestore
   ) {this.matchCollectionRef = this.afs.collection<Match>('match') }
-
+  // #############################################################################################################
   ngOnInit() {
     this.matchModif = this.matchService.getMatch();
+            this.matchService.getPlayers().subscribe(response => {
+              this.allPlayers = response;
+              console.log(this.allPlayers);
+            }, err => console.log(err));
   }
+  // #############################################################################################################
   editMatch() {
     this.matchService.editMatch(this.matchModif).then(() => {
         console.log('match modifié avec succès');
@@ -63,5 +70,27 @@ export class GestionMatchPage implements OnInit {
     });
     await alert.present()
   }
-
+  // // ##############################################################################################
+  testPlayer(playerID: string) {
+    return this.matchModif.players.includes(playerID);
+  }
+  // // ##############################################################################################
+  checkNumberOfPlayers(playerID: string): boolean {
+    const numberOfPlayers = this.matchModif.players.length;
+    if (numberOfPlayers >= 5 && !this.testPlayer(playerID) ||
+    numberOfPlayers === 10 && this.testPlayer(playerID)) {
+      return true;
+    }
+    return false;
+  }
+  // ##############################################################################################
+  editNumberOfPlayers(playerID: string) {
+    if (!this.matchModif.players.includes(playerID)) {
+      this.matchModif.players.push(playerID);
+    } else {
+      const indexPlayer = this.matchModif.players.indexOf(playerID);
+      this.matchModif.players.splice(indexPlayer, 1);
+    }
+    console.log(this.matchModif.players);
+  }
 }

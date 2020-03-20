@@ -28,7 +28,7 @@ export class HomePage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     public contactService: ContactService,
-    private authenticateService: AuthenticateService,
+    public authenticateService: AuthenticateService,
     private alertCtrl: AlertController,
     private router: Router
     ) {}

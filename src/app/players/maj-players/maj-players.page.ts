@@ -10,7 +10,7 @@ import { Poste } from 'src/app/models/poste.model';
 })
 export class MajPlayersPage implements OnInit {
   id: string;
-  player: Player;
+  playerModif: Player;
   poste: Poste[];
   posteSelected: string;
   constructor(private playerService: PlayersService) { }
@@ -23,14 +23,13 @@ export class MajPlayersPage implements OnInit {
 
   getPlayer() {
     this.playerService.getPlayer(this.id).subscribe(p => {
-      this.player = {id: this.id, ...p};
-      console.log(this.player);
+      this.playerModif = p;
+      console.log(this.playerModif);
     }, err => console.log(err));
   }
   getPlayerPoste() {
     this.playerService.getPlayerPoste().subscribe(response => {
       this.poste = response;
-      console.log(this.poste);
     }, err => console.log(err));
     }
 
@@ -40,6 +39,9 @@ export class MajPlayersPage implements OnInit {
       return postechecked;
     }
     posteCheck(posteNom) {
-      this.player.poste.includes(posteNom);
+    return this.playerModif.poste.includes(posteNom);
+    }
+    majJoueur(joueur) {
+      console.log(joueur);
     }
 }

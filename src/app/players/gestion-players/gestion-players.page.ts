@@ -32,6 +32,6 @@ export class GestionPlayersPage implements OnInit {
   }
   selectJoueur(id: string) {
     this.playerService.definePlayerId(id);
-    this.navCtrl.navigateForward(['/tabs/players/maj-players']);
+    this.navCtrl.navigateForward(['/tabs/players/gestion-players']);
   }
 }

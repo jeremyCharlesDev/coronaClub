@@ -16,29 +16,24 @@ export class MajPlayersPage implements OnInit {
   constructor(private playerService: PlayersService) { }
 
   ngOnInit() {
-    this.id = this.playerService.getPlayerId();
-    this.getPlayer();
+    this.playerModif = this.playerService.getPlayerInfo();
+    // this.getPlayer();
     this.getPlayerPoste();
   }
 
-  getPlayer() {
-    this.playerService.getPlayer(this.id).subscribe(p => {
-      this.playerModif = p;
-      console.log(this.playerModif);
-    }, err => console.log(err));
-  }
+  // getPlayer() {
+  //   this.playerService.getPlayer(this.id).subscribe(p => {
+  //     this.playerModif = p;
+  //     console.log(this.playerModif);
+  //   }, err => console.log(err));
+  // }
   getPlayerPoste() {
     this.playerService.getPlayerPoste().subscribe(response => {
       this.poste = response;
     }, err => console.log(err));
     }
-
-    PosteValue(postechecked: string) {
-      console.log(postechecked);
-      this.posteSelected = postechecked;
-      return postechecked;
-    }
     posteCheck(posteNom) {
+    console.log(posteNom);
     return this.playerModif.poste.includes(posteNom);
     }
     majJoueur(joueur) {

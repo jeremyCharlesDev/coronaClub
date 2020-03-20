@@ -20,6 +20,7 @@ export class AuthenticateService {
   async login(email: string, pass: string): Promise<any> {
     const userData = await this.afAuth.auth.signInWithEmailAndPassword(email, pass);
     const userid = userData.user.uid;
+    this.matchUserFromDB(userid);
   }
 
   matchUserFromDB(id: string) {

@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { AngularFirestoreCollection, AngularFirestoreDocument, AngularFirestore } from '@angular/fire/firestore';
 
 import { Plugins } from '@capacitor/core';
+import { Observable } from 'rxjs';
 const { Storage } = Plugins;
 
 
@@ -65,5 +66,9 @@ export class MatchService {
     const id = updatedMatch.id;
     delete updatedMatch.id;
     return this.matchCollectionRef.doc(id).update({...updatedMatch});
+  }
+  // ###############################################################
+  searchMatchs(term: string) {
+    
   }
 }

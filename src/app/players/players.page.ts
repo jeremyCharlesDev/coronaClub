@@ -19,13 +19,14 @@ export class PlayersPage implements OnInit {
   players: Player[];
 
   ngOnInit() {
+    // console.log(this.authenticateService.logUser);
     this.getJoueurs();
   }
 
   getJoueurs() {
     this.playerService.getAllJoueurs().subscribe(response => {
       this.players = response;
-      console.log(this.players);
+      // console.log(this.players);
     }, err => console.log(err));
   }
   selectJoueur(id: string) {

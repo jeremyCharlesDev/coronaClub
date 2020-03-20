@@ -2,6 +2,7 @@ import { Router } from '@angular/router';
 import { Player } from './../models/player.model';
 import { PlayersService } from './../services/players.service';
 import { Component, OnInit } from '@angular/core';
+import { AuthenticateService } from '../services/auth.service';
 
 @Component({
   selector: 'app-players',
@@ -10,7 +11,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlayersPage implements OnInit {
 
-  constructor(public playerService: PlayersService, private router: Router) {}
+  constructor(
+    public playerService: PlayersService,
+    private router: Router,
+    public authenticateService: AuthenticateService
+    ) {}
   players: Player[];
 
   ngOnInit() {

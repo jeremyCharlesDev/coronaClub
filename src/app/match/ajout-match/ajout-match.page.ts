@@ -24,11 +24,26 @@ export class AjoutMatchPage {
   allPlayers: Array<Player>;
   allMatchs: Array<Match>;
   playerSelected: string[];
+  formattedAddress: "";
   constructor(
     private matchService: MatchService,
     private navController: NavController
 
   ) { }
+    // #############################################################################################################
+  options = {
+    componentRestrictions: {
+      country:['FR']
+    }
+  }
+  // #############################################################################################################
+  public handleAddressChange(address: any) {
+
+  this.formattedAddress = address.formatted_address;
+  console.log(address.formatted_address);
+
+  }
+  // #############################################################################################################
   async ionViewWillEnter() {
     this.matchService.getPlayers().subscribe(response => {
       this.allPlayers = response;

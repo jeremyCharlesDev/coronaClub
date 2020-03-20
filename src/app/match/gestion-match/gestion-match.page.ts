@@ -15,12 +15,26 @@ export class GestionMatchPage implements OnInit {
   matchModif: Match
   matchCollectionRef: AngularFirestoreCollection<Match>;
   allPlayers: Array<Player>;
+  formattedAddress: "";
   constructor(
     public matchService: MatchService,
     public navController: NavController,
     private alertCtrl: AlertController,
     private afs: AngularFirestore
   ) {this.matchCollectionRef = this.afs.collection<Match>('match') }
+     // #############################################################################################################
+     options = {
+      componentRestrictions: {
+        country:['FR']
+      }
+    }
+    // #############################################################################################################
+    public handleAddressChange(address: any) {
+  
+    this.formattedAddress = address.formatted_address;
+    console.log(address.formatted_address);
+  
+    }
   // #############################################################################################################
   ngOnInit() {
     this.matchModif = this.matchService.getMatch();
@@ -32,8 +46,7 @@ export class GestionMatchPage implements OnInit {
   // #############################################################################################################
   editMatch() {
     this.matchService.editMatch(this.matchModif).then(() => {
-        console.log('match modifié avec succès');
-        //toast ici avec un erreur aussi :)
+        this.navController.navigateBack('/tabs/match');
 
         
     })

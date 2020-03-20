@@ -12,34 +12,45 @@ import { NavController } from '@ionic/angular';
 })
 
 export class MatchPage implements OnInit{
-  private recherche = new Subject<string>();
   matchs: Array<Match>;
-  matchs$: Observable<Match>[];
+  matchsToDisplay: Array<Match>;
   constructor(
     private matchService: MatchService,
     private navController: NavController
-  ) { }
+  ) { this.matchService.getMatchs();}
+  // ###############################################################
   ngOnInit(): void {
     this.matchService.getMatchs().subscribe(response => {
       this.matchs= response;
+      this.matchsToDisplay = response;
       console.log(this.matchs);
     }, err => console.log(err));
   }
-  searchMatch = '';
-  resultMatch: any;
-  async ionViewWillEnter() {
-    this.matchService.getMatchs().subscribe(response => {
-      this.matchs = response;
-      // console.log(this.matchs);
-    }, err => console.log(err));
-  }
+  // ###############################################################
+  // async ionViewWillEnter() {
+  //   this.matchService.getMatchs().subscribe(response => {
+  //     this.matchs = response;
+  //     // console.log(this.matchs);
+  //   }, err => console.log(err));
+  // }
+  // ###############################################################
   manageMatch(match: Match) {
     this.matchService.moreDetails(match);
     this.navController.navigateForward('tabs/match/gestion-match');
     console.log(match);
   }
-  search(rech: string) {
-    this.recherche.next(rech);
+  // ###############################################################
+  getMatchsBySearch(ev) {
+    let val = ev.target.value.toLowerCase();
+    if (val && val.trim() != '') {
+      this.matchsToDisplay = this.matchs.filter(match => match.nom.toLowerCase().startsWith(val));
+    }else{
+      this.matchsToDisplay = this.matchs;
+    }
   }
-
+  // ###############################################################
+  
+  
 }
+
+

@@ -11,24 +11,18 @@
 
 <ion-content>
 	<div class="container-match">
-		<ion-list class="ion-margin-top">
-			<ion-item>
-				<ion-input type="search" 
-				#recherche
-				(keyup)="search(recherche.value)"
-				placeholder="Rechercher..."></ion-input>
-			</ion-item>
-			<ion-item-divider color="primary"></ion-item-divider>
-			<ion-item *ngFor="let match of matchs">
-				<ion-label>
-					<ion-row>
-						<ion-col size="6">{{ match.nom }}</ion-col>
-						<ion-col size="5">{{ match.date | date:'dd/MM/yyyy' }}</ion-col>
-						<ion-col size="1"><ion-icon (click)="manageMatch(match)" name="settings"></ion-icon></ion-col>
-					</ion-row>
-				</ion-label>
-			</ion-item>
-		</ion-list>
+		<ion-searchbar (ionInput)="getMatchsBySearch($event)" placeholder="Rechercher..."></ion-searchbar>
+			<ion-list class="ion-margin-top">
+				<ion-item *ngFor="let match of matchsToDisplay">
+					<ion-label>
+						<ion-row>
+							<ion-col size="6">{{ match.nom }}</ion-col>
+							<ion-col size="5">{{ match.date | date:'dd/MM/yyyy' }}</ion-col>
+							<ion-col size="1"><ion-icon (click)="manageMatch(match)" name="settings"></ion-icon></ion-col>
+						</ion-row>
+					</ion-label>
+				</ion-item>
+			</ion-list>
 
 
 

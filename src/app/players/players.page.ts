@@ -23,8 +23,8 @@ export class PlayersPage implements OnInit {
       console.log(this.players);
     }, err => console.log(err));
   }
-  selectJoueur(player: string) {
-    this.playerService.definePlayerId(player);
+  selectJoueur(id: string) {
+    this.playerService.definePlayerId(id);
     this.router.navigate(['/tabs/players/gestion-players']);
   }
 }

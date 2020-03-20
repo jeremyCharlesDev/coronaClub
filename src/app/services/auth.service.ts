@@ -34,9 +34,8 @@ export class AuthenticateService {
           }
         }
       },
-      err => console.log(err);
-      
-    )
+      err => console.log(err)
+    );
   }
 
   logout(): Promise<any> {
@@ -46,9 +45,8 @@ export class AuthenticateService {
         this.logUser.id = '';
         this.logUser.isAdmin = false;
       },
-      err => console.log(err);
-      
-    )
+      err => console.log(err)
+    );
   }
 
   createNewUser(email: string, pass: string): Promise<any> {

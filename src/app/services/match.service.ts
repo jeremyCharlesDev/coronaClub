@@ -36,7 +36,7 @@ export class MatchService {
     return this.matchCollectionRef.add(match);
   }
   // ###############################################################
-  deleteMatch(id: string): Promise<any>{
+  deleteMatch(id: string): Promise<any> {
     return this.afs.collection('match').doc(id).delete();
   }
   // ###############################################################
@@ -47,7 +47,6 @@ export class MatchService {
        const id = a.payload.doc.id;
        return {id, ...data};
       }))
-      
     );
   }
   // ###############################################################

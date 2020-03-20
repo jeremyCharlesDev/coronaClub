@@ -20,6 +20,16 @@ const routes: Routes = [
             path: 'login',
             loadChildren: () =>
               import('../home/login/login.module').then(m => m.LoginPageModule)
+          },
+          {
+            path: 'edit-home',
+            loadChildren: () =>
+              import('../home/edit-home/edit-home.module').then(m => m.EditHomePageModule)
+          },
+          {
+            path: 'forgotpw',
+            loadChildren: () =>
+              import('../home/forgotpw/forgotpw.module').then(m => m.ForgotpwPageModule)
           }
         ]
       },

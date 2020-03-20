@@ -14,15 +14,15 @@ export class GestionPlayersPage implements OnInit {
   constructor(public playerService: PlayersService, private navCtrl: NavController) { }
 
   ngOnInit() {
-    this.id = this.playerService.getPlayerId();
-    this.getPlayer();
+    this.player = this.playerService.getPlayerInfo();
+    // this.getPlayer();
   }
-  getPlayer() {
-    this.playerService.getPlayer(this.id).subscribe(p => {
-      this.player = {id: this.id, ...p};
-      console.log(this.player);
-    }, err => console.log(err));
-  }
+  // getPlayer() {
+  //   this.playerService.getPlayer(this.id).subscribe(p => {
+  //     this.player = {id: this.id, ...p};
+  //     console.log(this.player);
+  //   }, err => console.log(err));
+  // }
   deletePlayer(id: string) {
     if (confirm('Voulez-vous virer ce joueur ?')) {
       this.playerService.deletePlayer(id).then(() => {
@@ -30,8 +30,8 @@ export class GestionPlayersPage implements OnInit {
       });
     }
   }
-  selectJoueur(id: string) {
-    this.playerService.definePlayerId(id);
+  selectJoueur(player: Player) {
+    this.playerService.definePlayer(player);
     this.navCtrl.navigateForward(['/tabs/players/maj-players']);
   }
 }

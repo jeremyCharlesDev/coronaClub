@@ -63,7 +63,7 @@
     <label for="poste">Postes</label>
     <ion-item *ngFor="let p of poste; let i=index">
       <ion-label>{{p.nom}}</ion-label>
-      <input type="radio" [value]="p.nom" class="radio" (click)="PosteValue(p.nom)" [checked]="posteCheck(p.nom)" slot="end">
+      <ion-checkbox [value]="p.nom"  class="radio" [checked]="posteCheck(p.nom)" slot="end"></ion-checkbox>
     </ion-item>
   </ion-list>
     </ion-card-content>

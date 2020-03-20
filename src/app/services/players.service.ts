@@ -15,6 +15,7 @@ export class PlayersService {
   uploadPercent: Observable<number>;
   downloadUrl: Observable<string>;
   player: Player;
+  playerId: string;
   constructor(private afs: AngularFirestore,
               private storage: AngularFireStorage) {
       this.playerCollectionRef = this.afs.collection<Player>('user');
@@ -29,6 +30,11 @@ export class PlayersService {
       }))
     );
   }
+  getPlayer(id: string): Observable<Player> {
+    this.playerDoc = this.afs.doc<Player>(`user/` + id);
+    return this.playerDoc.valueChanges();
+  }
+
   getPlayerPoste() {
     return this.posteCollectionRef.snapshotChanges().pipe(
       map(actions => actions.map(a => {
@@ -38,6 +44,19 @@ export class PlayersService {
       }))
     );
   }
+
+  definePlayerId(id: string) {
+      this.playerId = id;
+  }
+
+  getPlayerId() {
+    return this.playerId;
+  }
+
+  deletePlayer(id: string): Promise<any> {
+    return this.playerCollectionRef.doc(id).delete();
+  }
+
   addPlayer(player: Player): Promise<any> {
     return this.playerCollectionRef.add(player);
   }

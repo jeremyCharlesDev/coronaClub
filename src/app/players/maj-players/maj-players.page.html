@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-start">Modifier Joueur</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>  
+  <ion-content>
+    <form #editJoueurs="ngForm">
+    <ion-card>
+      <ion-card-content>
+      <ion-row>
+      <ion-col size="6">
+      <ion-input
+      type="text"
+      id="newJoueur"
+      name="nom"
+      class="inputWidth"
+      [(ngModel)]="playerModif.nom"
+      required
+      placeholder="Nom du joueur"
+      ></ion-input>
+    </ion-col>
+    <ion-col size="6">
+      <ion-input
+      type="text"
+      id="newJoueur"
+      name="prenom"
+      class="inputWidth"
+      required
+      [(ngModel)]="playerModif.prenom"
+      placeholder="Prénom du joueur"
+      ></ion-input>
+    </ion-col>
+    </ion-row>
+    <ion-row>
+       <ion-col size="7">
+      <ion-input
+      type="text"
+      id="newJoueur"
+      name="email"
+      class="inputWidthEmail"
+      required
+      [(ngModel)]="playerModif.email"
+      placeholder="Email du joueur"
+      ></ion-input>
+    </ion-col>
+      <ion-col size="5">
+      <ion-input
+      type="text"
+      id="newJoueur"
+      name="tel"
+      class="inputWidth"
+      required
+      [(ngModel)]="playerModif.tel"
+      placeholder="Téléphone du joueur"
+      ></ion-input>
+      </ion-col>
+    </ion-row>
+      <ion-list>
+    <label for="poste">Postes</label>
+    <ion-item *ngFor="let p of poste; let i=index">
+      <ion-label>{{p.nom}}</ion-label>
+      <input type="radio" [value]="p.nom" class="radio" (click)="PosteValue(p.nom)" [checked]="posteCheck(p.nom)" slot="end">
+    </ion-item>
+  </ion-list>
+    </ion-card-content>
+  </ion-card>
+  <ion-button expand="full" (click)="majJoueur(editJoueurs.value)"  >Valider</ion-button>
+  </form>
+  </ion-content>
+  
+</ion-content>

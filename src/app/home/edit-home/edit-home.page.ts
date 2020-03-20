@@ -26,10 +26,7 @@ export class EditHomePage implements OnInit {
       private router: Router,
       private storage: AngularFireStorage,
       public navCtrl: NavController,
-      // private fb: FormBuilder
   ) { }
-
-
 
 ngOnInit(): void {
   this.getContact();
@@ -41,42 +38,6 @@ getContact() {
     // console.log(this.contact);
   }, err => console.log(err));
 }
-// createForm() {
-//   this.contactForm = this.fb.group({
-//     nom: ['', Validators.compose([
-//       Validators.required,
-//       this.validTexts()
-//     ])],
-//     adresse: ['', Validators.compose([
-//       Validators.required,
-//       this.validTexts()
-//     ])],
-//     logo: null,
-//     codePostal: null,
-//     ville: null,
-//     email: null,
-//     tel: null,
-//   });
-//   this.contactForm.patchValue({
-//     nom: this.contact.nom,
-//     adresse: this.contact.adresse,
-//     logo: this.contact.logo,
-//     codePostal: this.contact.codePostal,
-//     ville: this.contact.ville,
-//     email: this.contact.email,
-//     tel: this.contact.tel
-//   });
-// }
-// validTexts(): ValidatorFn {
-//   return (control: AbstractControl): { [key: string]: any } => {
-//     const regexp = new RegExp('^[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ._;\\-\\,\\!\\?\\\'\\s]{1,100}$');
-//     const texte = control.value;
-//     const test = regexp.test(texte);
-//     // tslint:disable-next-line: object-literal-key-quotes
-//     return test ? null : { 'erreur' : { texte } };
-//   };
-// }
-
 
 onSubmit(): void {
   this.contactService.updateContact(this.contact).then(() => {

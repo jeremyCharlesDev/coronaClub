@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { AjoutMatchPageRoutingModule } from './ajout-match-routing.module';
 
 import { AjoutMatchPage } from './ajout-match.page';
+import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AjoutMatchPageRoutingModule
+    AjoutMatchPageRoutingModule,
+    GooglePlaceModule
   ],
   declarations: [AjoutMatchPage]
 })

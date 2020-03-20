@@ -68,7 +68,4 @@ export class MatchService {
     return this.matchCollectionRef.doc(id).update({...updatedMatch});
   }
   // ###############################################################
-  searchMatchs(term: string) {
-    
-  }
 }

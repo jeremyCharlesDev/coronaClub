@@ -15,7 +15,7 @@ export class AddPlayersPage implements OnInit {
     email: '',
     tel: '',
     prenom: '',
-    poste: '',
+    poste: [],
     photo: 'https://image.shutterstock.com/image-vector/profile-photo-vector-placeholder-pic-260nw-535853263.jpg',
   };
   poste: Poste[];
@@ -31,7 +31,7 @@ export class AddPlayersPage implements OnInit {
     this.newJoueur.email = email;
     this.newJoueur.tel = tel;
     this.newJoueur.prenom = prenom;
-    this.newJoueur.poste = this.posteSelected;
+    this.newJoueur.poste.push(this.posteSelected);
     console.log(this.newJoueur);
     this.playerService.addPlayer(this.newJoueur).then(() => {
       this.router.navigate(['/tabs/players']);
@@ -42,10 +42,6 @@ export class AddPlayersPage implements OnInit {
       this.poste = response;
       console.log(this.poste);
     }, err => console.log(err));
-    }
-
-    addPhoto(event) {
-      this.playerService.uploadFile(event);
     }
     PosteValue(postechecked: string) {
       console.log(postechecked);

@@ -8,7 +8,7 @@
 </ion-header>
 <ion-content>  
   <ion-content>
-    <form #editJoueurs="ngForm">
+    <form #editJoueurs="ngForm" (ngSubmit)="onSubmit()" >
     <ion-card>
       <ion-card-content>
       <ion-row>
@@ -61,14 +61,19 @@
     </ion-row>
       <ion-list>
     <label for="poste">Postes</label>
-    <ion-item *ngFor="let p of poste; let i=index">
-      <ion-label>{{p.nom}}</ion-label>
-      <ion-checkbox [value]="p.nom"  class="radio" [checked]="posteCheck(p.nom)" slot="end"></ion-checkbox>
+    <ion-item>
+      <select>
+        <option *ngFor="let p of poste; let i=index" [value]="playerModif.poste" (change)="PosteValue(p.nom)" [selected]="testPoste(p.nom)">{{p.nom}}</option>
+      </select>
     </ion-item>
   </ion-list>
     </ion-card-content>
+    <ion-item>
+      <ion-label position="floating" class="ion-padding ion-margin">Photo :</ion-label>
+      <ion-input type="file" name="photo" accept="image/*" (change)="uploadFile($event)" ></ion-input>
+    </ion-item>
   </ion-card>
-  <ion-button expand="full" (click)="majJoueur(editJoueurs.value)"  >Valider</ion-button>
+  <ion-button type="submit" expand="full">Valider</ion-button>
   </form>
   </ion-content>
   

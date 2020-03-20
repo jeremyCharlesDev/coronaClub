@@ -8,5 +8,5 @@ export class Player {
     prenom: string;
     isAdmin?: boolean;
     photo: string;
-    poste: string;
+    poste: string[];
 }

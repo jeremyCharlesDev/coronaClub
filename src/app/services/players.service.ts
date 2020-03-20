@@ -12,7 +12,6 @@ export class PlayersService {
   playerCollectionRef: AngularFirestoreCollection<Player>;
   posteCollectionRef: AngularFirestoreCollection<Poste>;
   playerDoc: AngularFirestoreDocument<Player>;
-  uploadPercent: Observable<number>;
   downloadUrl: Observable<string>;
   player: Player;
   // playerId: string;
@@ -62,19 +61,21 @@ export class PlayersService {
     return this.playerCollectionRef.add(player);
   }
 
-  uploadFile(event) {
-    const file = event.target.files[0];
-    const filePath = this.player.id;
-    const fileRef = this.storage.ref(filePath);
-    const task = this.storage.upload(filePath, file);
-    this.uploadPercent = task.percentageChanges();
-    task.snapshotChanges().pipe(
-      finalize(() => this.downloadUrl = fileRef.getDownloadURL())
-    ).subscribe(() => {
-      fileRef.getDownloadURL().subscribe(datas => {
-        this.player.photo = datas;
-      });
-    });
-}
+  // editJoueur(updatedjoueur: Player) {
+  //   console.log(updatedjoueur);
+  //   const id = updatedjoueur.id;
+  //   delete updatedjoueur.id;
+  //   return this.playerCollectionRef.doc(id).update({...updatedjoueur});
+  // }
 
+updateJoueur(player: Player) {
+  return this.playerCollectionRef.doc(player.id).update({
+    nom: player.nom,
+    prenom: player.prenom,
+    email: player.email,
+    poste: player.poste,
+    tel: player.tel,
+    photo: player.photo
+  });
+}
 }

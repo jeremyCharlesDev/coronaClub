@@ -6,7 +6,7 @@ export class Player {
     tel: string;
     nom: string;
     prenom: string;
-    role?: string;
+    isAdmin?: boolean;
     photo: string;
     poste: string;
 }

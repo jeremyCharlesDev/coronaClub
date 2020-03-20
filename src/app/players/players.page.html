@@ -2,7 +2,7 @@
   <ion-toolbar color="primary">
     <ion-title class="ion-text-start">Gestion des Joueurs</ion-title>
 <ion-buttons slot="end">
-  <ion-button [routerLink]="['/tabs/players/add-players']">
+  <ion-button *ngIf="authenticateService.logUser.isAdmin" [routerLink]="['/tabs/players/add-players']">
     <ion-icon size="large" name="add-circle"></ion-icon>
 </ion-button>
 </ion-buttons>

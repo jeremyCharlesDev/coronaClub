@@ -58,15 +58,8 @@ export class PlayersService {
   }
 
   addPlayer(player: Player): Promise<any> {
-    return this.playerCollectionRef.add(player);
+    return this.playerCollectionRef.doc(player.id).set(player);
   }
-
-  // editJoueur(updatedjoueur: Player) {
-  //   console.log(updatedjoueur);
-  //   const id = updatedjoueur.id;
-  //   delete updatedjoueur.id;
-  //   return this.playerCollectionRef.doc(id).update({...updatedjoueur});
-  // }
 
 updateJoueur(player: Player) {
   return this.playerCollectionRef.doc(player.id).update({

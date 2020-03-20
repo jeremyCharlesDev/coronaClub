@@ -42,12 +42,6 @@ export class MajPlayersPage implements OnInit {
       console.log(this.posteSelected);
       return postechecked;
     }
-    // majJoueur() {
-    //     this.playerService.editJoueur(this.joueurModif).then(() => {
-    //       this.navCtrl.navigateBack('tabs/players');
-    //  });
-    // }
-
 
     onSubmit(): void {
     this.playerService.updateJoueur(this.playerModif).then(() => {

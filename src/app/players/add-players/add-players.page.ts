@@ -1,3 +1,4 @@
+import { AuthenticateService } from 'src/app/services/auth.service';
 import { Poste } from './../../models/poste.model';
 import { Component, OnInit } from '@angular/core';
 import { PlayersService } from 'src/app/services/players.service';
@@ -16,25 +17,32 @@ export class AddPlayersPage implements OnInit {
     tel: '',
     prenom: '',
     poste: [],
+    isAdmin: false,
+    password: '',
     photo: 'https://image.shutterstock.com/image-vector/profile-photo-vector-placeholder-pic-260nw-535853263.jpg',
   };
   poste: Poste[];
   posteSelected: string;
-  constructor(private playerService: PlayersService, private router: Router) { }
+  constructor(private playerService: PlayersService, private router: Router, private authservice: AuthenticateService) { }
 
   ngOnInit() {
     this.getPlayerPoste();
   }
 
-    addJoueur(nom: string, email: string, tel: string, prenom: string) {
+    addJoueur(nom: string, email: string, tel: string, prenom: string, password: string) {
     this.newJoueur.nom = nom;
     this.newJoueur.email = email;
     this.newJoueur.tel = tel;
     this.newJoueur.prenom = prenom;
+    this.newJoueur.password = password;
+    this.newJoueur.isAdmin = false;
     this.newJoueur.poste.push(this.posteSelected);
-    console.log(this.newJoueur);
-    this.playerService.addPlayer(this.newJoueur).then(() => {
-      this.router.navigate(['/tabs/players']);
+    this.authservice.createNewUser(this.newJoueur.email, this.newJoueur.password).then((data) => {
+      const newUserId = data.user.uid;
+      this.newJoueur.id = newUserId;
+      this.playerService.addPlayer(this.newJoueur).then(() => {
+        this.router.navigate(['/tabs/players']);
+      });
     });
     }
     getPlayerPoste() {

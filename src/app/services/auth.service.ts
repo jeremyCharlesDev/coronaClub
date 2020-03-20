@@ -17,12 +17,9 @@ export class AuthenticateService {
     private playerService: PlayersService
   ) { }
 
-  login(email: string, pass: string): Promise<any> {
-    return this.afAuth.auth.signInWithEmailAndPassword(email, pass).then(
-      (userData) => {
-        const userid = userData.user.uid;
-      }
-    );
+  async login(email: string, pass: string): Promise<any> {
+    const userData = await this.afAuth.auth.signInWithEmailAndPassword(email, pass);
+    const userid = userData.user.uid;
   }
 
   matchUserFromDB(id: string) {
@@ -38,15 +35,15 @@ export class AuthenticateService {
     );
   }
 
-  logout(): Promise<any> {
-    return this.afAuth.auth.signOut().then(
-      () => {
-        this.isLog = false;
-        this.logUser.id = '';
-        this.logUser.isAdmin = false;
-      },
-      err => console.log(err)
-    );
+  async logout(): Promise<any> {
+    try {
+      await this.afAuth.auth.signOut();
+      this.isLog = false;
+      this.logUser.id = '';
+      this.logUser.isAdmin = false;
+    } catch (err) {
+      return console.log(err);
+    }
   }
 
   createNewUser(email: string, pass: string): Promise<any> {

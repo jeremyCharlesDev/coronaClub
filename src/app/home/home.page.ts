@@ -3,7 +3,7 @@ import { Contact } from './../models/contact.model';
 import { ContactService } from './../services/contact.service';
 
 import { AuthenticateService } from '../services/auth.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 
 @Component({
@@ -23,8 +23,10 @@ export class HomePage implements OnInit {
   //   logo : './../../assets/img/logo.png'
   // };
   contact: Contact[];
+  team: Contact = null;
 
   constructor(
+    private route: ActivatedRoute,
     public contactService: ContactService,
     private authenticateService: AuthenticateService,
     private alertCtrl: AlertController,
@@ -39,11 +41,17 @@ export class HomePage implements OnInit {
     this.authenticateService.logout().then(
       async () => {
         const alert = await this.alertCtrl.create({
-          message: 'Vous êtes déconnecté !',
+          message: 'Voulez-vous vous déconnecter !',
           buttons: [
             {
+              text: 'Annuler',
+              role: 'cancel',
+              handler: () => {
+                this.authenticateService.isLog = true;
+               },
+            },
+            {
               text: 'Ok',
-              role: 'Annulé',
             handler: () => {
               this.router.navigate(['/tabs/home']);
              },
@@ -56,7 +64,7 @@ export class HomePage implements OnInit {
       async error => {
         const errorAlert = await this.alertCtrl.create({
           message: error.message,
-          buttons: [{ text: 'Ok', role: 'Annulé' }],
+          buttons: [{ text: 'Ok', role: 'cancel' }],
         });
         await errorAlert.present();
       }
@@ -65,9 +73,14 @@ export class HomePage implements OnInit {
   getContact() {
     this.contactService.getClub().subscribe(response => {
       this.contact = response;
-      console.log(this.contact);
+      // console.log(this.contact);
     }, err => console.log(err));
-
-}
+  }
+//   getContact() {
+//   const ID = this.route.snapshot.paramMap.get('id');
+//   this.contactService.getContact(ID).subscribe(d => {
+//     this.contact = { id: ID,  ...d };
+//   }, err => console.log(err));
+// }
 
 }

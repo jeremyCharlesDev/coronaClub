@@ -27,7 +27,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    AngularFirestoreModule,
+    AngularFirestoreModule.enablePersistence(),
     AngularFireStorageModule
   ],
   providers: [

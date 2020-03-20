@@ -60,13 +60,6 @@ export class ContactService {
     });
   }
 
-  async storeLieux() {
-    return await Storage.set({
-      key: 'contact',
-      value: JSON.stringify(this.contact)
-    });
-  }
-
 
   editContact(updateContact: Contact) {
     // tslint:disable-next-line: prefer-for-of
@@ -81,7 +74,6 @@ export class ContactService {
         break;
       }
     }
-    this.storeLieux();
   }
 
 

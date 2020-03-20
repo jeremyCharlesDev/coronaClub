@@ -7,12 +7,12 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding ion-margin">
-  <h2 class="ion-text-center ion-margin">Modifier les infos du club</h2>
-  <form #contactForm="ngForm" (ngSubmit)="editContact(contactForm.value)">
+<ion-content class="ion-padding ion-margin" *ngIf="contact">
+  <!-- <h2 class="ion-text-center ion-margin">Modifier les infos du club</h2> -->
+  <form #contactForm="ngForm" (ngSubmit)="onSubmit()">
     <ion-item>
       <ion-label position="floating">Nom du club : </ion-label>
-      <ion-input type="text" name="nom" [(ngModel)]="contactModif.nom" required placeholder="Nom du club"></ion-input>
+      <ion-input type="text" name="nom" [(ngModel)]="contact.nom" required placeholder="Nom du club"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Adresse :</ion-label>
@@ -33,6 +33,12 @@
     <ion-item>
       <ion-label position="floating">Email :</ion-label>
       <ion-input type="text" name="email" [(ngModel)]="contact.email" required placeholder="Email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Logo :</ion-label>
+      <ion-input type="file" name="logo" accept="image/*" (ionChange)="uploadFile($event)" ></ion-input>
+      <progress max="100" value="{{ uploadPercent | async }}"></progress>
+					{{ uploadPercent | async | number:'1.0-2' }} %
     </ion-item>
     <ion-button type="submit" class="ion-margin" expand="block" [disabled]="!contactForm.valid">Enregistrer</ion-button>
   </form>

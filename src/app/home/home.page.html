@@ -14,7 +14,7 @@
 <ion-content [fullscreen]="true">
   <div class="ion-text-center" *ngFor="let c of contact">
     <h1 class="nameTeam">{{c.nom}}</h1>
-    <img [src]="c.logo" alt="logo"/>
+    <img class="imgLogo" [src]="c.logo" alt="logo"/>
   </div>
 
   <ion-list class="ion-margin" *ngFor="let c of contact">

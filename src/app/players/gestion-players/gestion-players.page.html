@@ -1,9 +1,40 @@
-<ion-header>
+<ion-header >
   <ion-toolbar color="primary">
-    <ion-title>gestion du Joueur </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{player?.prenom}} {{player?.nom}}</ion-title>
   </ion-toolbar>
+  <ion-fab vertical="top" horizontal="end">
+    <ion-fab-button>
+      <ion-icon name="construct">
+      </ion-icon>
+    </ion-fab-button>
+      <ion-fab-list>
+          <ion-fab-button color='primary' (click)="deletePlayer(player.id)">
+          <ion-icon name="trash"></ion-icon>
+  </ion-fab-button>
+  <ion-fab-button color='primary' (click)="selectJoueur(player.id)">
+    <ion-icon name="pencil"></ion-icon>
+  </ion-fab-button>
+</ion-fab-list>
+</ion-fab>
 </ion-header>
 
-<ion-content>
-
+<ion-content fullscreen>
+  <ion-card class="row ion-text-center">
+    <div class="col">
+    <img class='imgDisc' [src]="player?.photo">
+  </div>
+  <div class='col'>
+    <ion-card-header>
+      <ion-card-title>{{player?.prenom}} {{player?.nom}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Poste : {{player?.poste}}</p>
+      <p><ion-icon slot="center" name="call"></ion-icon>{{player?.tel}}</p>
+      <p><ion-icon slot="center" name="at-sharp"></ion-icon>{{player?.email}}</p>
+    </ion-card-content>
+  </div>
+    </ion-card>
 </ion-content>

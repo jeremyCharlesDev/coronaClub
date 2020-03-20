@@ -1,7 +1,9 @@
 import { Component, OnInit} from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { Observable, Subject } from 'rxjs';
 import { Match } from '../models/match.model';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { MatchService } from '../services/match.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-match',
@@ -10,16 +12,25 @@ import { MatchService } from '../services/match.service';
 })
 
 export class MatchPage implements OnInit{
+  private recherche = new Subject<string>();
   matchs: Array<Match>;
+  matchs$: Observable<Match>[];
   constructor(
     private matchService: MatchService,
     private navController: NavController
   ) { }
-  ngOnInit() {
+  ngOnInit(): void {
     this.matchService.getMatchs().subscribe(response => {
       this.matchs= response;
       console.log(this.matchs);
     }, err => console.log(err));
+    this.matchs$ = this.recherche.pipe(
+      debounceTime(150),
+      distinctUntilChanged(),
+      switchMap((term: string) =>
+        this.matchService.searchMatchs(term)
+      )
+    );
   }
   searchMatch = '';
   resultMatch: any;
@@ -34,4 +45,8 @@ export class MatchPage implements OnInit{
     this.navController.navigateForward('tabs/match/gestion-match');
     console.log(match);
   }
+  search(rech: string) {
+    this.recherche.next(rech);
+  }
+
 }

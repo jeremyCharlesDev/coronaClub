@@ -6,6 +6,14 @@ import { AuthenticateService } from '../services/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 
+import {
+  Plugins,
+  PushNotification,
+  PushNotificationToken,
+  PushNotificationActionPerformed } from '@capacitor/core';
+
+const { PushNotifications } = Plugins;
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -35,6 +43,34 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     this.getContact();
+
+  // Register with Apple / Google to receive push via APNS/FCM
+  PushNotifications.register().then(() => {
+    // On success, we should be able to receive notifications
+    PushNotifications.addListener('registration', 
+      (token: PushNotificationToken) => {
+        alert('Push registration success, token: ' + token.value);
+      }
+    );
+    });
+
+    PushNotifications.addListener('registrationError', 
+      (error: any) => {
+        alert('Error on registration: ' + JSON.stringify(error));
+      }
+    );
+
+    PushNotifications.addListener('pushNotificationReceived', 
+      (notification: PushNotification) => {
+        alert('Push received: ' + JSON.stringify(notification));
+      }
+    );
+
+    PushNotifications.addListener('pushNotificationActionPerformed', 
+      (notification: PushNotificationActionPerformed) => {
+        alert('Push action performed: ' + JSON.stringify(notification));
+      }
+    );
   }
 
   logout() {

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "281081875243",
+    "firebase_url": "https://coronavirusclub-b3c0f.firebaseio.com",
+    "project_id": "coronavirusclub-b3c0f",
+    "storage_bucket": "coronavirusclub-b3c0f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:281081875243:android:f8338bbe96cc659314936e",
+        "android_client_info": {
+          "package_name": "io.ionic.starter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "281081875243-jh3n8p6taq8lku1ge9hrhaufbs4robc6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYL-2lcfJO9ETDU6HF4uajjVfGCa3I69s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "281081875243-jh3n8p6taq8lku1ge9hrhaufbs4robc6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

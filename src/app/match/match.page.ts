@@ -24,13 +24,6 @@ export class MatchPage implements OnInit{
       this.matchs= response;
       console.log(this.matchs);
     }, err => console.log(err));
-    this.matchs$ = this.recherche.pipe(
-      debounceTime(150),
-      distinctUntilChanged(),
-      switchMap((term: string) =>
-        this.matchService.searchMatchs(term)
-      )
-    );
   }
   searchMatch = '';
   resultMatch: any;

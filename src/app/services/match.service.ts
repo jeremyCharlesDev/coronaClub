@@ -68,18 +68,7 @@ export class MatchService {
     return this.matchCollectionRef.doc(id).update({...updatedMatch});
   }
   // ###############################################################
-  searchMatchs(term: string): Observable<Match[]> {
-    return this.afs.collection('match', ref =>
-      ref.orderBy('nom')
-      .startAt(term)
-      .endAt(term + '\uf8ff ')
-      .limit(5)
-    ).snapshotChanges().pipe(
-      map(actions => actions.map(a => {
-        const data = a.payload.doc.data() as Match;
-        const id = a.payload.doc.id;
-        return {id, ...data};
-      }))
-    )
+  searchMatchs(term: string) {
+    
   }
 }

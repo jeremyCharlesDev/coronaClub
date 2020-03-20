@@ -11,20 +11,14 @@
 
 <ion-content>
 	<div class="container-match">
-		<ion-item>
-			<ion-input type="search" 
-			#recherche
-			(keyup)="search(recherche.value)"
-			placeholder="Rechercher..."></ion-input>
-		</ion-item>
-		<div class="collection">
-			<ion-list class="ion-margin-top">
-				<ion-item *ngFor="let result of matchs$ | async" (click)="manageMatch(result)">
-					{{ result.nom }}
-				</ion-item>
-			</ion-list>
-		</div>
 		<ion-list class="ion-margin-top">
+			<ion-item>
+				<ion-input type="search" 
+				#recherche
+				(keyup)="search(recherche.value)"
+				placeholder="Rechercher..."></ion-input>
+			</ion-item>
+			<ion-item-divider color="primary"></ion-item-divider>
 			<ion-item *ngFor="let match of matchs">
 				<ion-label>
 					<ion-row>
